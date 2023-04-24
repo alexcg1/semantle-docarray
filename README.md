@@ -15,6 +15,7 @@ This is a simple game that leverages [DocArray v2](https://docs.docarray.org/) a
 ## Tips
 
 - To get a hint, type `/hint` and GPT will generate a hint for you.
+- To get the answer, type `/answer`.
 - To exit, type `/exit` or `/quit`.
 
 ## FAQ
