@@ -1,6 +1,6 @@
 # Semantle-DocArray
 
-This is a simple game that leverages [DocArray v2]() and the [OpenAI embeddings API](), similar to [Semantle]().
+This is a simple game that leverages [DocArray v2](https://docs.docarray.org/) and the [OpenAI embeddings API](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings), similar to [Semantle](https://semantle.com/).
 
 ## How do I play?
 
