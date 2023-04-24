@@ -5,7 +5,10 @@ from docarray.documents import TextDoc
 from docarray.typing import NdArray
 from scipy.spatial.distance import cosine, euclidean
 
-from helper import get_hint, get_word_temp, gpt_encode, wordlist_to_doclist
+from helper import (get_hint, get_word_temp, gpt_encode, welcome_string,
+                    wordlist_to_doclist)
+
+print(welcome_string)
 
 
 class WordDoc(TextDoc):
@@ -16,7 +19,7 @@ all_words = wordlist_to_doclist('wordlists/10k.txt')
 
 target_word = random.choice(all_words)
 gpt_encode(target_word)
-print(target_word.text)
+# print(target_word.text)
 
 guess = WordDoc(text='')
 
@@ -30,6 +33,8 @@ while guess.text != target_word.text:
         print(get_hint(target_word))
     elif guess.text.lower() == '/quit' or guess.text.lower() == '/exit':
         sys.exit()
+    elif guess.text.lower() == '/answer':
+        print(target_word.text)
 
     else:
         gpt_encode(guess)
