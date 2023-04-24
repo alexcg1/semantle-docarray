@@ -7,7 +7,8 @@ from docarray.documents import TextDoc
 from docarray.typing import NdArray
 from dotenv import load_dotenv
 
-load_dotenv()
+if os.path.isfile('.env'):
+    load_dotenv()
 
 
 class WordDoc(TextDoc):
@@ -24,15 +25,6 @@ def wordlist_to_doclist(filename: str):
     return docs
 
 
-def encode_word2vec(doc, model_path):
-    if doc.text in model:
-        # print(f'Finding vector for {doc.text}')
-        embedding = model[doc.text]
-        doc.embedding = embedding
-
-    return doc
-
-
 def gpt_encode(doc, model_name='text-embedding-ada-002'):
     openai.api_key = os.environ['OPENAI_API_KEY']
     response = openai.Embedding.create(input=doc.text, model=model_name)
@@ -46,3 +38,12 @@ def check_same_embeddings(embedding1, embedding2):
         return True
     else:
         return False
+
+
+def get_word_temp(distance, hot=0.1, warm=0.2):
+    if distance <= hot:
+        return 'Hot'
+    elif hot < distance < warm:
+        return 'Warm'
+    else:
+        return 'Cold'

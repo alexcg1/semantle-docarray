@@ -5,7 +5,7 @@ from docarray.documents import TextDoc
 from docarray.typing import NdArray
 from scipy.spatial.distance import cosine, euclidean
 
-from helper import WordDoc, gpt_encode, wordlist_to_doclist
+from helper import WordDoc, get_word_temp, gpt_encode, wordlist_to_doclist
 
 
 class WordDoc(TextDoc):
@@ -28,7 +28,12 @@ while guess.text != target_word.text:
     guess = WordDoc(user_input)
     guess = gpt_encode(guess)
 
-    euc_distance = euclidean(target_word.embedding, guess.embedding)
-    print(f'Try again. Your distance is {round(euc_distance, 2)}')
+    distance = cosine(target_word.embedding, guess.embedding)
+    temperature = get_word_temp(distance)
+
+    if guess.text != target_word.text:
+        print(
+            f'Try again. Your distance is {round(distance, 2)}. Your guess is {temperature}.'
+        )
 
 print(f'Congrats! You guessed in {counter} turns')
