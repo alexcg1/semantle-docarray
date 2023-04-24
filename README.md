@@ -12,6 +12,11 @@ This is a simple game that leverages [DocArray v2](https://docs.docarray.org/) a
 6. If you get it wrong, you'll see how close your guess is. Hot is closer, cold is further.
 7. When you guess correctly you win the game.
 
+## Tips
+
+- To get a hint, type `/hint` and GPT will generate a hint for you.
+- To exit, type `/exit` or `/quit`.
+
 ## FAQ
 
 ### What similarity metric do you use?
