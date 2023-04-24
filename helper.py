@@ -47,3 +47,16 @@ def get_word_temp(distance, hot=0.1, warm=0.2):
         return 'Warm'
     else:
         return 'Cold'
+
+
+def get_hint(doc, model_name='text-davinci-003'):
+    response = openai.Completion.create(
+        model=model_name,
+        prompt=f'Create a crossword clue for the word "{doc.text}". You will give a brief dictionary definition of the word, but not say the word itself.',
+        max_tokens=100,
+        temperature=0.3,
+    )
+
+    hint = response.choices[0].text
+
+    return hint
