@@ -57,6 +57,6 @@ def get_hint(doc, model_name='text-davinci-003'):
         temperature=0.3,
     )
 
-    hint = response.choices[0].text
+    hint = response.choices[0].text.strip()
 
     return hint
