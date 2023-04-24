@@ -22,8 +22,6 @@ guess = WordDoc(text='')
 
 counter = 0
 
-hint = get_hint(target_word)
-
 while guess.text != target_word.text:
     counter += 1
     guess = WordDoc(text=input('What is your guess? '))
