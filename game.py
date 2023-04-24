@@ -23,13 +23,14 @@ gpt_encode(target_word)
 
 guess = WordDoc(text='')
 
-counter = 0
+guess_counter = 0
+hint_counter = 0
 
 while guess.text != target_word.text:
-    counter += 1
     guess = WordDoc(text=input('What is your guess? '))
 
     if guess.text.lower() == '/hint':
+        hint_counter += 1
         print(get_hint(target_word))
     elif guess.text.lower() == '/quit' or guess.text.lower() == '/exit':
         sys.exit()
@@ -37,6 +38,7 @@ while guess.text != target_word.text:
         print(target_word.text)
 
     else:
+        guess_counter += 1
         gpt_encode(guess)
 
         distance = cosine(target_word.embedding, guess.embedding)
@@ -47,4 +49,6 @@ while guess.text != target_word.text:
                 f'Try again. Your distance is {round(distance, 2)}. Your guess is {temperature}.'
             )
 
-print(f'Congrats! You guessed in {counter} turns')
+print(
+    f'Congrats! You guessed in {guess_counter} turn(s) and {hint_counter} hint(s).'
+)
