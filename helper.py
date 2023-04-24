@@ -19,7 +19,7 @@ def wordlist_to_doclist(filename: str):
     docs = DocList[TextDoc]()
     with open(filename, 'r') as file:
         for line in file:
-            doc = TextDoc(text=line.strip())
+            doc = TextDoc(text=line.lower().strip())
             docs.append(doc)
 
     return docs
@@ -54,7 +54,7 @@ def get_hint(doc, model_name='text-davinci-003'):
         model=model_name,
         prompt=f'Create a crossword clue for the word "{doc.text}". You will give a brief dictionary definition of the word, but not say the word itself.',
         max_tokens=100,
-        temperature=0.3,
+        temperature=0.7,
     )
 
     hint = response.choices[0].text.strip()
