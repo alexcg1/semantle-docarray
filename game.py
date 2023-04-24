@@ -1,12 +1,11 @@
 import random
+import sys
 
-from docarray import DocList
 from docarray.documents import TextDoc
 from docarray.typing import NdArray
 from scipy.spatial.distance import cosine, euclidean
 
-from helper import (WordDoc, get_hint, get_word_temp, gpt_encode,
-                    wordlist_to_doclist)
+from helper import get_hint, get_word_temp, gpt_encode, wordlist_to_doclist
 
 
 class WordDoc(TextDoc):
@@ -29,12 +28,13 @@ while guess.text != target_word.text:
     counter += 1
     guess = WordDoc(text=input('What is your guess? '))
 
-    if guess == '/hint'.lower():
+    if guess.text.lower() == '/hint':
         print(get_hint(target_word))
+    elif guess.text.lower() == '/quit' or guess.text.lower() == '/exit':
+        sys.exit()
 
     else:
-        # guess = WordDoc(user_input)
-        guess = gpt_encode(guess)
+        gpt_encode(guess)
 
         distance = cosine(target_word.embedding, guess.embedding)
         temperature = get_word_temp(distance)
